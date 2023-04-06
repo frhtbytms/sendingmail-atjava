@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="javax.mail">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.jdks/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../VizeProjesi/lib/javax.annotation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../VizeProjesi/lib/javax.ejb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../VizeProjesi/lib/javax.jms.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../VizeProjesi/lib/javax.persistence.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
