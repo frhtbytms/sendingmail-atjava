@@ -17,8 +17,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-class menu extends Main{
-    public static int menu1 (){
+class menu extends Main{//bu benim ilk ekran açıldığında gelem menu için oluşturduğum class
+    //constructera gerek duymadım
+    public static int menu1 (){//menu fonksiyonum
         System.out.println("*********************");
         System.out.println("ÜYE İŞLEMLERİ MENÜSÜ");
         System.out.println("1-Elit üye ekleme");
@@ -27,23 +28,25 @@ class menu extends Main{
         System.out.println("*********************");
         System.out.print("Hangi işlemi gerçekleştirmek istersiniz? : ");
         Scanner scan =new Scanner(System.in);
-        int karar=scan.nextInt();
+        int karar=scan.nextInt();//kullanıcıdan kararını aldım
         if(karar>=1 &&karar<=3)//burda kullanıcınn girdiği değeri kontrol ettimki main fonksiyonda gerek kalmasın
-            return karar;
+            System.out.println("komutunuz alındı efendim.");//doğru bir sayı girdi
         else{
-            System.out.println("menudeki işlemlerin başındaki sayıları kullan(1,2,3) !!!");
-            menu1();
+            System.out.println("\nmenudeki işlemlerin başındaki sayıları kullan(1,2,3) !!!");//geçersiz değer için uyarı mesajı
+            menu1();//geçersiz bir değer girğiği için recursive func yaptım func içine tekara attım
         }
-        return karar;
+        return karar;//kararı fonksiyon dışına attım
     }
 }
 
 
-class MailGondermeMenu extends menu{
+class MailGondermeMenu extends menu{//kalıtım yaptım
+    //kullanıcı ana menude 3 e basınca gelicek ekran için bu classı oluşturdum
     public MailGondermeMenu(){//constructer gerek yok ama göstermek istedim
+        //daha sonrasında belki bir şeyler eklerim
 
     }
-    public static int mailgonderme() {
+    public static int mailgonderme() {//bu fonksiyonuda bu classdaki işlemleri tel bir satırda gerçekleştirebilmek için yaptım
         System.out.println("*********************");
         System.out.println("ÜYE İŞLEMLERİ MENÜSÜ");
         System.out.println("1-Elit üyelere mail");
@@ -52,42 +55,42 @@ class MailGondermeMenu extends menu{
         System.out.println("*********************");
         System.out.print("Hangi işlemi gerçekleştirmek istersiniz? : ");
         Scanner scan = new Scanner(System.in);
-        int karar = scan.nextInt();
+        int karar = scan.nextInt();//kararını aldım
         if (karar >= 1 && karar <= 3)//burda kullanıcınn girdiği değeri kontrol ettimki main fonksiyonda gerek kalmasın
             return karar;
         else {
-            System.out.println("menudeki işlemlerin başındaki sayıları kullan(1,2,3) !!!");
-            menu.menu1();
+            System.out.println("\nmenudeki işlemlerin başındaki sayıları kullan(1,2,3) !!!");
+            mailgonderme();
         }
         return karar;
     }
 }
 
 class genelemail {
-    public static String gonderenmail;//gönderen kişiden aldığım mail adres almak için yaptım
-    public static String gonderenpassword;//gönderen kişiden aldığım mail password almak için yaptım
-    public static String metinmail;//gönderen kişiden mail metni için aldım
+    public static String gonderenmail;//gönderen kişiden aldığım mail adres tutmak için yaptım
+    public static String gonderenpassword;//gönderen kişiden aldığım mail password tutmak için yaptım
+    public static String metinmail;//gönderen kişiden mail göndermek istediği metni tutmak için yaptım
     public genelemail(String gonderenmail, String gonderenpassword,String metinmail) {//constructer
         this.gonderenmail = gonderenmail;
         this.gonderenpassword = gonderenpassword;
         this.metinmail = metinmail;
     }
 
-    public static void mailgonder() throws Exception {
+    public static void mailgonder() throws Exception {//mail gönderme işlemi daha düzenli bir kod olsun diye bu fonksiyonu yaptım
         String dosyaAd = "genelkullanıcılar.txt";//dosya adını sürekli yazmamak için
         File f = new File(dosyaAd);//dosyayı açtım
         if (!f.exists()) {//dosya yoksa oluştucak
             f.createNewFile();
         }
-        String[] epostaDizi;
-        List<String> epostaListesi = new ArrayList<>();//dosya okumakta zorlandığım için bu kodu googladan öğrendim
-        Pattern desen = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");
+        String[] epostaDizi;//aşağıdaki list içindeki epostaları bunun içine koycam
+        List<String> epostaListesi = new ArrayList<>();//dosya okumakta zorlandığım için bu yöntemi googledan öğrendim ve epostaları bu list içine atmak için bu listi oluşturdum
+        Pattern desen = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");//bu özelliklere sahip satırın bölünmüş kelimelerini epostalistesi içiine atmak için desen patternini oluşturdum
         Matcher matcher;
         try {
             FileReader fileReader = new FileReader(dosyaAd);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String satir;
-            while ((satir = bufferedReader.readLine()) != null) {
+            while ((satir = bufferedReader.readLine()) != null) {//while döngüsü ile epostaları okuyup list içine attım
                 matcher = desen.matcher(satir);
                 while (matcher.find()) {
                     String eposta = matcher.group();
@@ -97,14 +100,14 @@ class genelemail {
                 }
             }
             fileReader.close();
-            epostaDizi = new String[epostaListesi.size()];
+            epostaDizi = new String[epostaListesi.size()];//bu ve br alt satırda list içindekileri dizi içine attım
             epostaDizi = epostaListesi.toArray(epostaDizi);
             System.out.println("gönderilcek epostalar:");
-            for (String eposta : epostaDizi) {
+            for (String eposta : epostaDizi) {//gönderilcek e postaları ekrana yazar
 
                 System.out.println(eposta);
             }
-            Properties props = new Properties();;
+            Properties props = new Properties();;//bundan sonrası zaten mail gönderbilmek için googldan öğrendiklerim
             props.put("mail.smtp.host", "smtp-mail.outlook.com");
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.starttls.enable", "true");
@@ -112,7 +115,7 @@ class genelemail {
             Session session = Session.getDefaultInstance(props,
                     new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(gonderenmail, gonderenpassword);
+                            return new PasswordAuthentication(gonderenmail, gonderenpassword);// mail göndercek olan kişiden aldığım bilgiler
                         }
                     });
 
@@ -120,10 +123,10 @@ class genelemail {
                 Message msg = new MimeMessage(session);
                 msg.setFrom(new InternetAddress(gonderenmail, "NoReply"));
                 msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-                msg.setSubject("Welcome To Java Mail API");
-                msg.setText(metinmail);
+                msg.setSubject("mesajjjjj konusu");
+                msg.setText(metinmail);// mail göndercek olan kişiden aldığım metin
 
-                Transport.send(msg);
+                Transport.send(msg);//mesaj gönderme komutu
                 System.out.println(email + " adresine e-posta gönderildi.");
             }
         }
@@ -137,7 +140,7 @@ class genelemail {
 
 
 }
-class elitemail  {
+class elitemail  {//bu classda üstteki genele mail classı ile aynı mantık sadece gönderilcek kişiler farklı
     public static String gonderenmail;
     public static String gonderenpassword;
     public static String metinmail;
