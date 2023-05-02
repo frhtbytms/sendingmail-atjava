@@ -1,4 +1,4 @@
-# benim-depom
+# sending mail at java
 
 The first class, menu, is a subclass of Main. It has a static method called menu1 that prints a menu for user operations and takes user input to select an option. If the user enters an invalid input, the method calls itself recursively until the user enters a valid input. The method returns the user's choice as an integer.
 
